@@ -43,22 +43,8 @@ const injectPins = () => {
 function onIframeLoad() {
   iframeLoaded.value = true
 
-  try {
-    const iframeDoc = iframeRef.value.contentWindow.document
-    const hasGuano = iframeDoc.querySelector('script[data-guano]')
+  console.log('[Superbird] ✅ Iframe loaded, assuming Guano.js is injected by proxy.')
 
-    if (!hasGuano) {
-      const script = iframeDoc.createElement('script')
-      script.setAttribute('data-guano', 'true')
-      script.src = 'https://www.superbird.app/guano.js' // 🔥 Host it somewhere you control
-      script.defer = true
-      iframeDoc.head.appendChild(script)
-
-      console.log('[Superbird] 🧠 Re-injected Guano.js')
-    }
-  } catch (err) {
-    console.warn('[Superbird] ❌ Cannot inject script due to cross-origin:', err)
-  }
 }
 
 
