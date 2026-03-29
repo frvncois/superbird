@@ -38,7 +38,7 @@ const privacy = [
     >
       <!-- Panel -->
       <div
-        class="w-full rounded-2xl overflow-y-auto bg-background border relative"
+        class="w-full rounded-2xl overflow-y-auto bg-background relative"
         style="max-width: 400px; max-height: calc(100vh - 48px); box-shadow: 0 8px 60px rgba(0,0,0,0.12); animation: superbird-modal-in 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;"
       >
         <!-- Close -->
@@ -58,22 +58,22 @@ const privacy = [
             </div>
             <div>
               <div class="text-sm font-semibold">Superbird</div>
-              <div class="text-xs text-secondary mt-0.5">Free · client-side · no account</div>
+              <div class="text-xs text-foreground/60 mt-0.5">Free · client-side · no account</div>
             </div>
           </div>
 
           <!-- What it is -->
           <div class="mb-6">
-            <p class="text-[10px] font-semibold uppercase tracking-widest text-secondary/60 mb-2.5">What it is</p>
-            <p class="text-xs leading-relaxed text-secondary">
+            <p class="text-[10px] font-semibold uppercase tracking-widest text-foreground/60 mb-2.5">What it is</p>
+            <p class="text-xs leading-relaxed text-foreground">
               A free toolkit for frontend developers. Audit site performance with Lighthouse, compress images directly in your browser, inspect DNS propagation, and test API endpoints — all in one place, all without creating an account or uploading anything.
             </p>
           </div>
 
           <!-- The name -->
           <div class="mb-6">
-            <p class="text-[10px] font-semibold uppercase tracking-widest text-secondary/60 mb-2.5">The name</p>
-            <p class="text-xs leading-relaxed text-secondary">
+            <p class="text-[10px] font-semibold uppercase tracking-widest text-foreground/60 mb-2.5">The name</p>
+            <p class="text-xs leading-relaxed text-foreground">
               I'm French-Canadian and I literally cannot pronounce "Superbird" correctly. It makes me laugh every time. That's the whole reason. There is no deeper meaning.
             </p>
           </div>
@@ -82,13 +82,13 @@ const privacy = [
 
           <!-- Privacy -->
           <div class="mb-6">
-            <p class="text-[10px] font-semibold uppercase tracking-widest text-secondary/60 mb-3">Privacy</p>
+            <p class="text-[10px] font-semibold uppercase tracking-widest text-foreground/60 mb-3">Privacy</p>
             <div class="rounded-xl border bg-foreground/[0.02] p-3 flex flex-col gap-2.5">
               <div v-for="item in privacy" :key="item" class="flex items-center gap-3">
                 <div class="size-4 rounded-full shrink-0 flex items-center justify-center" style="background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3);">
                   <CheckIcon class="size-2.5 text-success stroke-[2.5]" />
                 </div>
-                <p class="text-xs text-secondary">{{ item }}</p>
+                <p class="text-xs text-foreground">{{ item }}</p>
               </div>
             </div>
           </div>
@@ -101,15 +101,15 @@ const privacy = [
               href="https://donate.stripe.com/3cIfZhce21J07Wu3uBc3m01"
               target="_blank"
               rel="noopener noreferrer"
-              class="flex items-center justify-center w-full h-10 rounded-xl text-sm font-semibold transition-opacity hover:opacity-85"
-              style="background: var(--color-coffee); color: #fff;"
+              class="flex items-center justify-center w-full h-10 rounded-xl text-sm transition-opacity hover:opacity-85"
+              style="background: var(--color-coffee); color: var(--color-foreground);"
             >
               Buy me a coffee?
             </a>
           </div>
 
           <!-- Footer -->
-          <div class="flex items-center justify-center gap-4 text-xs text-secondary/60">
+          <div class="flex items-center justify-center gap-4 text-[10px] text-foreground/60 font-mono uppercase">
             <span>Made with ❤ in Montreal</span>
             <span>·</span>
             <a href="https://frvncois.com" target="_blank" rel="noopener noreferrer" class="hover:text-secondary transition-colors">

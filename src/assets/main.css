@@ -7,7 +7,7 @@
 
   --color-background: #ffffff;
   --color-foreground: #0a0a0a;
-  --color-secondary: #838fa0;
+  --color-secondary: #a0a3a6;
   --color-border: #e5e7eb;
   --color-icon-bg: #000000;
   --color-icon-txt: #FAFAFA;
@@ -17,7 +17,7 @@
   --score-red:   #ef4444;
   --c-border:    var(--color-border);
 
-  --color-coffee: #f5a623;
+  --color-coffee: #f9f183;
 
   /* Semantic color pairs — bg + fg */
   --color-green-bg:    #dcfce7;
@@ -58,6 +58,10 @@
     color: var(--color-foreground);
     transition: background-color 0.3s ease, color 0.3s ease;
   }
+}
+
+@layer utilities {
+  .bg-background { background-color: var(--color-background); }
 }
 
 @keyframes superbird-hero-icon-enter {

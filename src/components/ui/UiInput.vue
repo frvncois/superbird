@@ -32,7 +32,7 @@ defineEmits<{
     :disabled="disabled"
     :class="[
       'w-full bg-transparent text-foreground placeholder:text-foreground/40 disabled:pointer-events-none disabled:opacity-50',
-      variant === 'default' && 'border border-foreground/15 focus:border-foreground/40 focus:outline-2 focus:outline-foreground/10 transition-colors',
+      variant === 'default' && 'border border-foreground/15 focus:border-foreground/40 outline-3 outline-transparent focus:outline-secondary/10 transition-[border-color,outline-color]',
       variant === 'lookup' && 'border-none outline-none',
       {
         'h-12 px-3 text-sm rounded-2xl': size === 'default' && variant === 'default',

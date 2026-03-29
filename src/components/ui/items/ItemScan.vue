@@ -109,7 +109,7 @@ function formatValue(value: unknown, valueType?: string): string {
     >
       <div class="size-2 rounded-full mt-1.5 shrink-0" :style="{ backgroundColor: dotColor }" />
       <div class="flex-1 min-w-0">
-        <div class="text-xs font-medium">{{ title }}</div>
+        <div class="text-xs font-medium truncate">{{ title }}</div>
         <div v-if="description" class="text-[10px] text-secondary mt-0.5 leading-relaxed line-clamp-2">
           {{ description }}
         </div>
@@ -130,7 +130,7 @@ function formatValue(value: unknown, valueType?: string): string {
           v-for="h in visibleHeadings"
           :key="h.key"
           class="text-[10px] font-mono text-secondary uppercase tracking-wide"
-          :class="isNumericType(h.valueType) ? 'w-24 shrink-0 text-right' : 'flex-1 min-w-0 truncate'"
+          :class="isNumericType(h.valueType) ? 'w-24 shrink-0 text-right truncate' : 'flex-1 min-w-0 truncate'"
         >
           {{ h.label }}
         </span>

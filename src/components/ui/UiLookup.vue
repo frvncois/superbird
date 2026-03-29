@@ -31,7 +31,7 @@ const formStyle = computed(() => ({
 
 <template>
   <form
-    class="flex items-center gap-1.5 border rounded-2xl p-1.5"
+    class="flex items-center gap-1.5 border rounded-2xl p-1.5 outline-3 outline-transparent focus-within:outline-secondary/10 transition-[outline-color] duration-150"
     :style="formStyle"
     @submit.prevent="onAction"
   >
