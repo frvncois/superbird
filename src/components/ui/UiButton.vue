@@ -42,7 +42,7 @@ const active = computed(() => !!props.to && route.path === props.to)
         'h-7 px-3 text-xs rounded-xl': size === 'sm',
         'h-6 px-2 text-[10px] rounded-lg': size === 'xs',
         // Variants
-        'bg-black text-white hover:bg-black/85 focus-visible:outline-black': variant === 'default',
+        'bg-foreground text-background hover:bg-foreground/85 focus-visible:outline-foreground': variant === 'default',
         'bg-transparent border text-foreground hover:bg-foreground/5 focus-visible:outline-black': variant === 'outline' && !active,
         'bg-transparent text-foreground hover:bg-foreground/5 focus-visible:outline-black': variant === 'ghost' && !active,
         // Active

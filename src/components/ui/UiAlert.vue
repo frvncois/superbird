@@ -48,7 +48,8 @@ const open = defineModel<boolean>({ default: false })
 
             <!-- Button -->
             <button
-              class="w-full h-9 px-4 rounded-xl bg-black text-white text-sm font-medium hover:bg-black/85 transition-colors cursor-pointer"
+              class="w-full h-9 px-4 rounded-xl bg-foreground text-background text-sm font-medium hover:bg-foreground/85 cursor-pointer"
+              style="transition: background-color 0.25s ease, color 0.25s ease"
               @click="open = false"
             >
               {{ buttonLabel ?? 'Got it' }}

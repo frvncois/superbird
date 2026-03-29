@@ -27,7 +27,7 @@ const pStyle = computed(() => ({
 <template>
   <section>
     <div class="flex flex-col items-center gap-6 text-center pb-14 pt-4">
-      <span class="inline-flex items-center justify-center shrink-0 bg-icon-bg text-icon-txt size-14 p-4 rounded-2xl">
+      <span class="inline-flex items-center justify-center shrink-0 bg-icon-bg text-icon-txt size-14 p-4 rounded-2xl overflow-hidden">
         <SuperbirdIcon :style="iconStyle" />
       </span>
       <h1 class="text-4xl font-medium" :style="h1Style">Essential tools for <br>frontend devs</h1>

@@ -27,7 +27,7 @@ const TYPE_COLORS: Record<string, 'blue' | 'purple' | 'orange' | 'red' | 'green'
         class="border rounded-2xl overflow-hidden"
         :style="`animation: superbird-fade-in-up 0.5s ease both; animation-delay: ${idx * 70}ms`"
       >
-        <div class="flex gap-3 bg-secondary/5 p-3 border-b text-xs">
+        <div class="flex items-center gap-3 bg-secondary/5 p-3 border-b text-xs">
           <UiBadge :label="type" :color="TYPE_COLORS[type]" />
           <span class="text-secondary/75">{{ TYPE_META[type]?.label }}</span>
           <UiBadge :label="String(results[type].records.length)" color="light" class="ml-auto" />

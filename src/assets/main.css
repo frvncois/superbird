@@ -53,6 +53,11 @@
   *, *::before, *::after {
     border-color: var(--color-border);
   }
+  html, body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
 }
 
 @keyframes superbird-hero-icon-enter {
@@ -101,8 +106,17 @@
 }
 
 .dark {
-  --color-border: #1f2937;
-  --color-icon-bg: #1a1a1a;
-  --color-icon-txt: #fafafa;
-  --color-secondary: #838fa0;
+  --color-background: #0a0a0a;
+  --color-foreground: #fafafa;
+  --color-border:     #202224;
+  --color-secondary:  #626466;
+  --color-icon-bg:    #1a1a1a;
+  --color-icon-txt:   #fafafa;
+
+  --color-muted-bg:   #212222;
+  --color-muted-fg:   #6e737d;
+
+  --color-red-bg:     #2d1515;
+  --color-red-border: #5c2222;
+  --color-red-fg:     #fca5a5;
 }

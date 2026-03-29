@@ -22,7 +22,7 @@ const isHome = computed(() => route.path === '/')
       </div>
       <h1 class="font-semibold">Superbird</h1>
     </RouterLink>
-    <nav class="space-x-1.5">
+    <nav class="flex items-center gap-1.5">
       <UiButton variant="ghost" size="sm" to="/scan">Scan</UiButton>
       <UiButton variant="ghost" size="sm" to="/compress">Compress</UiButton>
       <UiButton variant="ghost" size="sm" to="/dns">DNS</UiButton>
