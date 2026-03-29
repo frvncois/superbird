@@ -6,6 +6,7 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   linkActiveClass: '',
   linkExactActiveClass: '',
+  scrollBehavior: () => ({ top: 0 }),
   routes: [
     {
       path: '/',

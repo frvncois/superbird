@@ -19,7 +19,7 @@ const wrapperStyle = computed(() => ({
 </script>
 
 <template>
-  <div class="flex gap-3" :style="wrapperStyle">
+  <div class="flex flex-col sm:flex-row gap-3" :style="wrapperStyle">
     <UiDropdown :icon="PhotoIcon" text="Format" :value="format.toUpperCase()">
       <UiSelect v-model="format" :options="['png', 'jpeg', 'webp']" />
     </UiDropdown>

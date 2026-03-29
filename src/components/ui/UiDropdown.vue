@@ -53,7 +53,7 @@ onUnmounted(() => document.removeEventListener('mousedown', handleOutsideClick))
   <div class="relative shrink-0">
     <button
       ref="triggerRef"
-      class="inline-flex items-center gap-3 h-8 px-3 w-[10em] rounded-xl border text-foreground hover:bg-secondary/10 active:bg-secondary/20 transition-colors cursor-pointer"
+      class="inline-flex items-center gap-3 h-8 px-3 w-full sm:w-[10em] rounded-xl border text-foreground hover:bg-secondary/10 active:bg-secondary/20 transition-colors cursor-pointer"
       @click="toggle"
     >
       <component :is="icon" class="size-4 text-secondary shrink-0" />

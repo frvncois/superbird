@@ -7,7 +7,7 @@ const { status, scores } = storeToRefs(useScanStore())
 </script>
 
 <template>
-  <div v-if="status === 'done'" class="grid grid-cols-4 gap-3">
+  <div v-if="status === 'done'" class="grid grid-cols-2 sm:grid-cols-4 gap-3">
     <ItemStats
       label="Performance"
       :score="scores?.performance ?? null"

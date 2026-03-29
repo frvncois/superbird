@@ -20,7 +20,7 @@ const isHome = computed(() => route.path === '/')
           :class="isHome ? 'opacity-0 group-hover:opacity-100' : 'opacity-100'"
         />
       </div>
-      <h1 class="font-semibold">Superbird</h1>
+      <h1 class="font-semibold" :class="!isHome ? 'hidden sm:block' : ''">Superbird</h1>
     </RouterLink>
     <nav class="flex items-center gap-1.5">
       <UiButton variant="ghost" size="sm" to="/scan">Scan</UiButton>

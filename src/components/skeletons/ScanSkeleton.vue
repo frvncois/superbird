@@ -6,7 +6,7 @@ defineProps<{ loading?: boolean }>()
 <template>
   <UiSkeleton :loading="loading">
     <!-- Score circles — 4 columns -->
-    <div class="grid grid-cols-4 gap-3">
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
       <div v-for="i in 4" :key="i" class="flex flex-col items-center gap-3 rounded-2xl py-6 border">
         <div class="size-14 rounded-full bg-secondary/15" />
         <div class="h-2 w-14 rounded bg-secondary/15" />

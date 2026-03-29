@@ -16,7 +16,7 @@ function cardStyle(i: number) {
 
 <template>
   <section>
-    <div class="grid grid-cols-2 gap-3">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
       <UiCard
         :icon="MagnifyingGlassIcon"
         title="Scan Website"
