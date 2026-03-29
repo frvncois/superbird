@@ -82,7 +82,7 @@ const privacy = [
           <div class="mb-6">
             <p class="text-[10px] font-semibold uppercase tracking-widest text-foreground/60 mb-2.5">The name</p>
             <p class="text-xs leading-relaxed text-foreground">
-              I'm French-Canadian and I literally cannot pronounce "Superbird" correctly. It makes me laugh every time. That's the whole reason. There is no deeper meaning.
+              I'm French-Canadian and I literally cannot pronounce "Superbird" correctly and that makes me laugh. That's the whole reason. There is no deeper meaning.
             </p>
           </div>
 

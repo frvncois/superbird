@@ -6,7 +6,7 @@ import { onBeforeRouteLeave } from 'vue-router'
 const leaving = ref(false)
 let guardFired = false
 
-const DURATION = 340
+const DURATION = 400
 
 export function useRouteLeave() {
   onMounted(() => {
