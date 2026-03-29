@@ -1,10 +1,17 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted } from 'vue'
+import { watch, onMounted, onUnmounted } from 'vue'
 import { CheckIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 import SuperbirdIcon from '@/assets/SuperbirdIcon.vue'
 import { useAboutModal } from '@/composables/useAboutModal'
+import { useLenis } from '@/composables/useLenis'
 
 const { isOpen, close } = useAboutModal()
+
+watch(isOpen, (open) => {
+  const lenis = useLenis()
+  if (!lenis) return
+  open ? lenis.stop() : lenis.start()
+})
 
 function onKeydown(e: KeyboardEvent) {
   if (e.key === 'Escape') close()
@@ -38,6 +45,7 @@ const privacy = [
     >
       <!-- Panel -->
       <div
+        data-lenis-prevent
         class="w-full rounded-2xl overflow-y-auto bg-background relative"
         style="max-width: 400px; max-height: calc(100vh - 48px); box-shadow: 0 8px 60px rgba(0,0,0,0.12); animation: superbird-modal-in 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;"
       >
@@ -109,12 +117,17 @@ const privacy = [
           </div>
 
           <!-- Footer -->
-          <div class="flex items-center justify-center gap-4 text-[10px] text-foreground/60 font-mono uppercase">
+          <div class="flex flex-col items-center justify-center gap-1 text-[10px] text-foreground/60 font-mono uppercase">
             <span>Made with ❤ in Montreal</span>
-            <span>·</span>
-            <a href="https://frvncois.com" target="_blank" rel="noopener noreferrer" class="hover:text-secondary transition-colors">
-              frvncois.com
-            </a>
+            <div class="">
+              <a href="mailto:hello@frvncois.com" target="_blank" rel="noopener noreferrer" class="hover:text-secondary transition-colors">
+                hello@frvncois.com
+              </a>
+              <span>·</span>
+              <a href="https://frvncois.com" target="_blank" rel="noopener noreferrer" class="hover:text-secondary transition-colors">
+                frvncois.com
+              </a>
+            </div>
           </div>
 
         </div>
