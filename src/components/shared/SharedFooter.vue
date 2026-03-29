@@ -13,7 +13,7 @@ const { open } = useAboutModal()
 
 <template>
   <footer :style="footerStyle">
-    <div class="flex flex-col items-center sm:flex-row sm:justify-between gap-2 border-t py-6 text-[10px] text-secondary/50 font-mono uppercase">
+    <div class="flex flex-col items-center sm:flex-row sm:justify-between gap-2 border-t py-6 text-[10px] text-secondary font-mono uppercase">
       <div>© 2026 Superbird · by <a href="https://frvncois.com" target="_blank" rel="noopener noreferrer" class="cursor-pointer hover:text-secondary transition-colors duration-[250ms]">Francois Lemieux</a></div>
       <div class="space-x-3">
         <RouterLink to="/terms" class="cursor-pointer hover:text-secondary transition-colors duration-[250ms]">Terms & Privacy</RouterLink>

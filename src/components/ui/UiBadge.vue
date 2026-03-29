@@ -13,7 +13,7 @@ withDefaults(
 </script>
 
 <template>
-  <span
+  <h3
     :class="[
       'inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-[10px] font-mono uppercase',
       {
@@ -30,5 +30,5 @@ withDefaults(
   >
     <span class="size-1.5 rounded-full bg-current opacity-50 shrink-0"></span>
     {{ label }}
-  </span>
+  </h3>
 </template>

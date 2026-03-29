@@ -19,7 +19,7 @@ defineProps<{
     <ArrowUpRightIcon class="absolute top-6 right-6 size-3 text-foreground/40 transition-transform duration-200 group-hover:-translate-y-[0.5em] group-hover:translate-x-[0.5em]" />
     <UiIcon :icon="icon" size="default" />
     <div class="flex flex-col gap-1">
-      <h3 class="font-medium text-sm text-foreground">{{ title }}</h3>
+      <h2 class="font-medium text-sm text-foreground">{{ title }}</h2>
       <p class="text-sm text-secondary">{{ description }}</p>
     </div>
     <div v-if="badges?.length" class="flex flex-wrap gap-1.5">
