@@ -141,6 +141,10 @@ export const useScanStore = defineStore('scan', () => {
   })
 
   async function scan() {
+    const v = url.value.trim()
+    if (v && !v.startsWith('http://') && !v.startsWith('https://')) {
+      url.value = 'https://' + v
+    }
     if (!isValidUrl.value) return
 
     abortController?.abort()

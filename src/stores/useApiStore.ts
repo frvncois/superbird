@@ -42,8 +42,12 @@ export const useApiStore = defineStore('api', () => {
   }
 
   async function send() {
-    const trimmedUrl = url.value.trim()
+    let trimmedUrl = url.value.trim()
     if (!trimmedUrl) return
+    if (trimmedUrl && !trimmedUrl.startsWith('http://') && !trimmedUrl.startsWith('https://')) {
+      trimmedUrl = 'https://' + trimmedUrl
+      url.value = trimmedUrl
+    }
     if (!isValidHttpUrl(trimmedUrl)) {
       status.value = 'error'
       errorMessage.value = 'URL must start with http:// or https://'
