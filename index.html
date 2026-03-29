@@ -8,8 +8,7 @@
     <title>Superbird — Free Tools for Frontend Devs</title>
     <meta name="description" content="A free toolkit for frontend developers. Audit site performance with Lighthouse, compress images, check DNS propagation, and test API endpoints — all in your browser, no account needed.">
     <meta name="author" content="Francois Lemieux">
-    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#ffffff">
 
     <!-- Canonical -->
     <link rel="canonical" href="https://superbird.io">
@@ -67,11 +66,7 @@
 
     <!-- Prevent flash of wrong theme -->
     <script>
-      ;(function() {
-        var s = localStorage.getItem('theme')
-        var d = window.matchMedia('(prefers-color-scheme: dark)').matches
-        if (s === 'dark' || (!s && d)) document.documentElement.classList.add('dark')
-      })()
+      if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark')
     </script>
 
     <!-- Umami-->
