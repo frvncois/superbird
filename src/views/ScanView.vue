@@ -28,8 +28,8 @@ const leaving = useRouteLeave()
 
 <template>
   <SharedIntro
-    title="Scan your website"
-    description="Full Lighthouse audit — performance, SEO, accessibility and core web vitals in one shot."
+    title="Website Audit Tool"
+    description="Run a full Lighthouse audit to analyze performance, SEO, accessibility and Core Web Vitals for any website."
   />
   <UiLookup
     v-model="url"

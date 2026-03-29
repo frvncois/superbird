@@ -43,8 +43,8 @@ const isJson = computed(() => {
 
 <template>
   <SharedIntro
-    title="Test API"
-    description="Fetch any public endpoint and explore the JSON response."
+    title="API Tester (REST Client)"
+    description="Send GET, POST, PUT and DELETE requests and inspect JSON responses in a structured view. No setup, no accounts, completely free."
   />
 
   <UiLookup

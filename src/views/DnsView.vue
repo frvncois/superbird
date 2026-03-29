@@ -19,8 +19,8 @@ const leaving = useRouteLeave()
 
 <template>
   <SharedIntro
-    title="Check DNS"
-    description="Inspect propagation of A, MX, TXT, CNAME and more in one shot."
+    title="DNS Lookup & Propagation Checker"
+    description="Check DNS records including A, AAAA, CNAME, MX and TXT. Instantly verify DNS propagation worldwide."
   />
   <UiLookup
     v-model="domain"

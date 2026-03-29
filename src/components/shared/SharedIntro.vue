@@ -26,7 +26,7 @@ const descStyle = computed(() => ({
   <section>
     <div class="flex flex-col gap-3">
       <h1 class="text-2xl font-semibold leading-none" :style="titleStyle">{{ title }}</h1>
-      <p class="text-sm max-w-[35ch] text-secondary" :style="descStyle">{{ description }}</p>
+      <p class="text-sm max-w-[50ch] text-secondary" :style="descStyle">{{ description }}</p>
     </div>
   </section>
 </template>

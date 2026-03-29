@@ -31,7 +31,7 @@ const pStyle = computed(() => ({
         <SuperbirdIcon :style="iconStyle" />
       </span>
       <h1 class="text-4xl font-medium" :style="h1Style">Essential tools for <br>frontend devs</h1>
-      <p class="text-sm text-secondary max-w-[25ch]" :style="pStyle">Compress images, audit site speed, check DNS records and test APIs. All in one place, all for free.</p>
+      <p class="text-sm text-secondary max-w-[25ch]" :style="pStyle">Compress images, audit site speed, check DNS records and test APIs.<br>All in one place, all for free.</p>
     </div>
   </section>
 </template>

@@ -16,8 +16,8 @@ const { addFiles } = compressStore
 
 <template>
   <SharedIntro
-    title="Optimize images. Instantly."
-    description="Resize and convert images to WebP, JPEG or PNG directly in your browser. No uploads."
+    title="Image Compressor & Converter"
+    description="Compress, resize and convert images to WebP, JPEG or PNG directly in your browser. Free and Unlimited."
   />
   <UiUpload :compact="items.length > 0" @select="addFiles" />
   <CompressSettings />
