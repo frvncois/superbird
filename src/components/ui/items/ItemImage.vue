@@ -38,8 +38,8 @@ const savedPct = computed(() => savings(props.item.originalSize, props.item.comp
       <!-- Skeleton -->
       <template v-if="item.status === 'converting'">
         <div style="animation: superbird-skeleton-pulse 1.8s ease-in-out infinite">
-          <div class="h-3.5 w-32 rounded bg-foreground/10 mb-1.5" />
-          <div class="h-2.5 w-24 rounded bg-foreground/10" />
+          <div class="h-3.5 w-32 rounded bg-secondary/15 mb-1.5" />
+          <div class="h-2.5 w-24 rounded bg-secondary/15" />
         </div>
       </template>
 

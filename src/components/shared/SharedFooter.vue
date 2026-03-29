@@ -14,11 +14,11 @@ const { open } = useAboutModal()
 <template>
   <footer :style="footerStyle">
     <div class="flex justify-between border-t py-6 text-[10px] text-secondary/50 font-mono uppercase">
-      <div>© 2026 Superbird · by <a href="https://frvncois.com" target="_blank" rel="noopener noreferrer" class="cursor-pointer hover:text-secondary" style="transition: color 0.25s ease">Francois Lemieux</a></div>
+      <div>© 2026 Superbird · by <a href="https://frvncois.com" target="_blank" rel="noopener noreferrer" class="cursor-pointer hover:text-secondary transition-colors duration-[250ms]">Francois Lemieux</a></div>
       <div class="space-x-3">
-        <RouterLink to="/terms" class="cursor-pointer hover:text-secondary" style="transition: color 0.25s ease">Terms & Privacy</RouterLink>
+        <RouterLink to="/terms" class="cursor-pointer hover:text-secondary transition-colors duration-[250ms]">Terms & Privacy</RouterLink>
         <span>·</span>
-        <button class="cursor-pointer hover:text-secondary uppercase" style="transition: color 0.25s ease" @click="open">About</button>
+        <button class="cursor-pointer hover:text-secondary uppercase transition-colors duration-[250ms]" @click="open">About</button>
       </div>
     </div>
   </footer>
