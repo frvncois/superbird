@@ -18,20 +18,20 @@ function cardStyle(i: number) {
   <section>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
       <UiCard
-        :icon="MagnifyingGlassIcon"
-        title="Scan Website"
-        description="Full Lighthouse audit — performance, SEO, accessibility and core web vitals."
-        :badges="['Performance', 'SEO', 'Accessibility']"
-        to="/scan"
-        :style="cardStyle(0)"
-      />
-      <UiCard
         :icon="PhotoIcon"
         title="Compress Images"
         description="Resize and convert images to WebP, JPEG or PNG directly in your browser."
         :badges="['Format', 'Size', 'Compress', 'Prefix']"
         to="/compress"
         :style="cardStyle(1)"
+      />
+      <UiCard
+        :icon="MagnifyingGlassIcon"
+        title="Scan Website"
+        description="Full Lighthouse audit — performance, SEO, accessibility and core web vitals."
+        :badges="['Performance', 'SEO', 'Accessibility']"
+        to="/scan"
+        :style="cardStyle(0)"
       />
       <UiCard
         :icon="GlobeAltIcon"

@@ -26,8 +26,8 @@ const isHome = computed(() => route.path === '/')
       >Superbird</h1>
     </RouterLink>
     <nav class="flex items-center gap-1.5">
-      <UiButton variant="ghost" size="sm" to="/scan">Scan</UiButton>
       <UiButton variant="ghost" size="sm" to="/compress">Compress</UiButton>
+      <UiButton variant="ghost" size="sm" to="/scan">Scan</UiButton>
       <UiButton variant="ghost" size="sm" to="/dns">DNS</UiButton>
       <UiButton variant="ghost" size="sm" to="/api">API</UiButton>
     </nav>
