@@ -65,7 +65,7 @@ const savedPct = computed(() => savings(props.item.originalSize, props.item.comp
     <!-- Actions -->
     <div class="flex items-center gap-2 shrink-0">
       <template v-if="item.status === 'done'">
-        <UiBadge :label="`-${savedPct}%`" color="green" />
+        <UiBadge :label="savedPct >= 0 ? `-${savedPct}%` : `+${Math.abs(savedPct)}%`" :color="savedPct >= 0 ? 'green' : 'red'" />
         <UiBadge :label="ext" color="light" />
         <button class="p-1.5 rounded-lg hover:bg-foreground/5 text-secondary hover:text-foreground transition-colors cursor-pointer" @click="downloadFile(item)">
           <ArrowDownTrayIcon class="size-4" />

@@ -1,8 +1,11 @@
 export function formatBytes(bytes: number): string {
   if (bytes === 0) return '0 B'
-  if (bytes < 1024) return bytes + ' B'
-  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB'
-  return (bytes / (1024 * 1024)).toFixed(1) + ' MB'
+  const sign = bytes < 0 ? '-' : ''
+  const abs = Math.abs(bytes)
+  if (abs < 1024) return sign + abs + ' B'
+  if (abs < 1024 * 1024) return sign + (abs / 1024).toFixed(1) + ' KB'
+  if (abs < 1024 * 1024 * 1024) return sign + (abs / (1024 * 1024)).toFixed(1) + ' MB'
+  return sign + (abs / (1024 * 1024 * 1024)).toFixed(1) + ' GB'
 }
 
 export function savings(orig: number, comp: number): number {
