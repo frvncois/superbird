@@ -19,7 +19,7 @@ function cardStyle(i: number) {
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
       <UiCard
         :icon="PhotoIcon"
-        title="Compress Images"
+        title="Compress your images"
         description="Resize and convert images to WebP, JPEG or PNG directly in your browser."
         :badges="['Format', 'Size', 'Compress', 'Prefix']"
         to="/compress"
@@ -27,7 +27,7 @@ function cardStyle(i: number) {
       />
       <UiCard
         :icon="MagnifyingGlassIcon"
-        title="Scan Website"
+        title="Scan your website"
         description="Full Lighthouse audit — performance, SEO, accessibility and core web vitals."
         :badges="['Performance', 'SEO', 'Accessibility']"
         to="/scan"
@@ -35,7 +35,7 @@ function cardStyle(i: number) {
       />
       <UiCard
         :icon="GlobeAltIcon"
-        title="Check DNS"
+        title="Check DNS propagation"
         description="Inspect propagation of A, MX, TXT, CNAME and more in one shot."
         :badges="['A', 'AAAA', 'CNAME', 'MX', 'TXT', 'NS']"
         to="/dns"
@@ -43,7 +43,7 @@ function cardStyle(i: number) {
       />
       <UiCard
         :icon="PlayIcon"
-        title="Test API"
+        title="Test any API"
         description="Fetch any public endpoint and explore the JSON response in a collapsible tree view."
         :badges="['GET', 'POST', 'PUT', 'DELETE', 'HEAD']"
         to="/api"
