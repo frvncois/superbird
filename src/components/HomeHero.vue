@@ -33,7 +33,7 @@ const badgeStyles = computed(() => [520, 600, 680, 760].map(delay => ({
 
 <template>
   <section>
-    <div class="flex flex-col items-center gap-6 text-center pb-14 pt-4">
+    <div class="flex flex-col items-center gap-6 text-center pb-10 pt-2">
       <span class="inline-flex items-center justify-center shrink-0 bg-icon-bg text-icon-txt size-14 p-4 rounded-2xl">
         <SuperbirdIcon :style="iconStyle" />
       </span>
