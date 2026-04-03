@@ -55,6 +55,7 @@ const isJson = computed(() => {
     loadingLabel="Sending…"
     :loading="status === 'loading'"
     :onAction="send"
+    historyKey="api"
   >
     <template #leading>
       <UiMethodSelect v-model="method" flat />

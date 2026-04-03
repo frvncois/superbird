@@ -40,6 +40,7 @@ const leaving = useRouteLeave()
     loadingLabel="Auditing…"
     :loading="status === 'loading'"
     :onAction="action"
+    historyKey="audit"
   />
 
   <div>

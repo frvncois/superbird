@@ -30,6 +30,7 @@ const leaving = useRouteLeave()
     loadingLabel="Checking…"
     :loading="status === 'loading'"
     :onAction="check"
+    historyKey="dns"
   />
 
   <div class="relative mt-2">

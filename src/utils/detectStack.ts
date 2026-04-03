@@ -149,7 +149,7 @@ function detectBuilders(html: string, urls: string[]): string[] {
 
   // --- Joomla ---
   if (
-    any(html, ['joomla!', '/media/jui/', '/media/system/js/']) ||
+    any(html, ['Joomla!', '/media/jui/', '/media/system/js/']) ||
     anyUrl(urls, ['/media/jui/', '/media/com_'])
   ) out.push('Joomla')
 
@@ -254,7 +254,6 @@ export function formatStackSentence(signals: string[]): string | null {
   // Context hint based on the primary platform
   const context = primary ? (BUILDER_CONTEXT[primary] ?? null) : null
 
-  const type = builder && !framework ? 'site' : 'app'
   const techLine = parts.join(' + ')
   const stackLine = `Running on ${techLine}.`
 

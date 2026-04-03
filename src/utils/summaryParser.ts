@@ -8,11 +8,27 @@ export type SummaryPart = {
 }
 
 const PHRASE_TO_AUDIT_ID: Record<string, string> = {
-  'unused JavaScript':       'unused-javascript',
-  'blocking scripts':        'render-blocking-resources',
-  'redirect chains':         'redirects',
-  'heavy images':            'uses-optimized-images',
-  'slow server response':    'server-response-time',
+  'unused JavaScript':              'unused-javascript',
+  'unused CSS':                     'unused-css-rules',
+  'render-blocking scripts':        'render-blocking-resources',
+  'redirect chains':                'redirects',
+  'unoptimized images':             'uses-optimized-images',
+  'oversized images':               'uses-responsive-images',
+  'legacy image formats':           'modern-image-formats',
+  'uncompressed text assets':       'uses-text-compression',
+  'poor cache policy':              'uses-long-cache-ttl',
+  'slow server response':           'server-response-time',
+  'excessive DOM size':             'dom-size',
+  'slow JavaScript boot time':      'bootup-time',
+  'heavy main-thread work':         'mainthread-work-breakdown',
+  'heavy third-party scripts':      'third-party-summary',
+  'legacy JavaScript polyfills':    'legacy-javascript',
+  'unoptimized animated content':   'efficient-animated-content',
+  'offscreen images loaded eagerly':'offscreen-images',
+  'missing preconnect hints':       'uses-rel-preconnect',
+  'deep critical request chains':   'critical-request-chains',
+  'high network latency':           'network-rtt',
+  'excessive page weight':          'total-byte-weight',
 }
 
 function parseLine(line: string): SummaryPart[] {
