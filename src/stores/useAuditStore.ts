@@ -321,40 +321,42 @@ export const useAuditStore = defineStore('audit', () => {
   const detectedStack = computed((): string[] => {
     if (!result.value) return []
 
-    // Scrape HTML fragments + URLs from all audit item fields
     const audits = result.value.lighthouseResult.audits
-    const fragments: string[] = [url.value]
+    const structuralFragments: string[] = []
+    const resourceUrls: string[] = [url.value]
+
     for (const audit of Object.values(audits)) {
       const items = audit.details?.items
       if (!Array.isArray(items)) continue
       for (const item of items) {
         for (const val of Object.values(item)) {
-          if (typeof val === 'string') {
-            fragments.push(val)
-          } else if (val && typeof val === 'object' && !Array.isArray(val)) {
+          if (val && typeof val === 'object' && !Array.isArray(val)) {
             const obj = val as Record<string, unknown>
-            const snippet = obj['snippet']
-            const urlVal = obj['url']
-            if (typeof snippet === 'string') fragments.push(snippet)
-            if (typeof urlVal === 'string') fragments.push(urlVal)
+            // Only structural signals: DOM snippets and URLs
+            if (typeof obj['snippet'] === 'string') structuralFragments.push(obj['snippet'])
+            if (typeof obj['url'] === 'string')     resourceUrls.push(obj['url'])
+          }
+          // Plain strings that look like URLs go to resourceUrls, not structural HTML
+          if (typeof val === 'string' && (val.startsWith('http') || val.startsWith('/'))) {
+            resourceUrls.push(val)
           }
         }
       }
     }
 
-    const html = fragments.join(' ')
-    const signals = detectStack(html)
+    const html = structuralFragments.join(' ')
+    const signals = detectStack(html, undefined, resourceUrls)
 
-    // Merge with stackPacks — Lighthouse's own framework fingerprinting
+    // Merge with Lighthouse's own stackPacks (authoritative)
     const packs = (result.value.lighthouseResult.stackPacks ?? []).map(s => s.title)
     const merged = [...packs]
     for (const sig of signals) {
       if (!merged.includes(sig)) merged.push(sig)
     }
 
-    // Nuxt/Next.js implies Vue/React — drop the base framework to avoid redundancy
-    if (merged.includes('Nuxt') || merged.includes('Next.js')) {
-      return merged.filter(s => s !== 'Vue' && s !== 'React')
+    // Meta-framework implies its base — remove redundant entry
+    if (merged.includes('Nuxt') || merged.includes('Next.js') || merged.includes('SvelteKit') || merged.includes('Remix')) {
+      return merged.filter(s => !['Vue', 'React', 'Svelte'].includes(s))
     }
 
     return merged
@@ -363,9 +365,12 @@ export const useAuditStore = defineStore('audit', () => {
   const auditSummary = computed((): string | null => {
     if (!scores.value || !topIssuesWithActions.value.length) return null
     return buildAuditSummary({
-      performance: scores.value.performance,
-      issues: topIssuesWithActions.value,
-      stack: detectedStack.value,
+      performance:   scores.value.performance,
+      seo:           scores.value.seo,
+      accessibility: scores.value.accessibility,
+      bestPractices: scores.value.bestPractices,
+      issues:        topIssuesWithActions.value,
+      stack:         detectedStack.value,
     })
   })
 
