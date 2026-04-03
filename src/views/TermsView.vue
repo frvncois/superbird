@@ -84,7 +84,7 @@ const contentStyle = computed(() => ({
 
           <div>
             <h2 class="text-sm font-semibold text-foreground mb-2">3. Third-Party Services</h2>
-            <p>When you use the Scan feature, your URL is sent to the Google PageSpeed Insights API. When you use the DNS checker, your domain is sent to a public DNS-over-HTTPS resolver. These services have their own privacy policies which we encourage you to review.</p>
+            <p>When you use the Audit feature, your URL is sent to the Google PageSpeed Insights API. When you use the DNS checker, your domain is sent to a public DNS-over-HTTPS resolver. These services have their own privacy policies which we encourage you to review.</p>
           </div>
 
           <div>

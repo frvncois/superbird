@@ -33,17 +33,17 @@ const badgeStyles = computed(() => [520, 600, 680, 760].map(delay => ({
 
 <template>
   <section>
-    <div class="flex flex-col items-center gap-6 text-center pb-10 pt-2">
-      <span class="inline-flex items-center justify-center shrink-0 bg-icon-bg text-icon-txt size-14 p-4 rounded-2xl">
+    <div class="flex flex-col items-center text-center gap-4 pb-18 pt-2">
+      <span class="inline-flex items-center justify-center shrink-0 bg-icon-bg text-icon-txt size-14 p-4 rounded-2xl mb-6">
         <SuperbirdIcon :style="iconStyle" />
       </span>
-      <h1 class="text-4xl font-medium" :style="h1Style">Essential tools for <br>frontend devs</h1>
-      <p class="text-sm text-secondary max-w-[30ch]" :style="pStyle">Compress images, audit site speed, check DNS records and test APIs.<br>All in one place.</p>
-      <div class="flex flex-wrap justify-center gap-1.5">
+      <h1 class="flex flex-col text-5xl font-medium" :style="h1Style">Your web toolkit<span>in one tab</span></h1>
+      <div class="flex flex-wrap justify-center gap-1.5 mt-1">
         <UiBadge label="Free" color="green" :style="badgeStyles[0]" />
         <UiBadge label="No signup" color="green" :style="badgeStyles[1]" />
         <UiBadge label="Unlimited usage" color="green" :style="badgeStyles[2]" />
       </div>
+      <p class="text-sm text-secondary" :style="pStyle">The essentials of building for the web</p>
     </div>
   </section>
 </template>

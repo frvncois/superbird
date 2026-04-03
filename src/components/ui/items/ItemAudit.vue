@@ -103,7 +103,7 @@ function formatValue(value: unknown, valueType?: string): string {
 
     <!-- Main row -->
     <div
-      class="flex items-start gap-3 p-3"
+      class="flex items-start gap-3.75 p-3.75"
       :class="hasDetails ? 'cursor-pointer select-none' : ''"
       @click="hasDetails ? expanded = !expanded : undefined"
     >

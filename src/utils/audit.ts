@@ -11,7 +11,7 @@ function isValidHttpUrl(value: string): boolean {
   }
 }
 
-export async function runScan(url: string, strategy = 'mobile', signal?: AbortSignal): Promise<LighthouseResult> {
+export async function runAudit(url: string, strategy = 'mobile', signal?: AbortSignal): Promise<LighthouseResult> {
   if (!isValidHttpUrl(url)) throw new Error('URL must start with http:// or https://')
   const categories = ['performance', 'seo', 'accessibility', 'best-practices']
     .map(c => `category=${c}`)

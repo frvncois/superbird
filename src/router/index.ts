@@ -15,10 +15,10 @@ const router = createRouter({
       meta: { title: 'Superbird — Free Tools for Frontend Devs' },
     },
     {
-      path: '/scan',
-      name: 'scan',
-      component: () => import('@/views/ScanView.vue'),
-      meta: { title: `Website Scanner — ${BASE_TITLE}` },
+      path: '/audit',
+      name: 'audit',
+      component: () => import('@/views/AuditView.vue'),
+      meta: { title: `Website Auditor — ${BASE_TITLE}` },
     },
     {
       path: '/compress',

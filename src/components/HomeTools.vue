@@ -20,32 +20,32 @@ function cardStyle(i: number) {
       <UiCard
         :icon="PhotoIcon"
         title="Compress your images"
-        description="Resize and convert images to WebP, JPEG or PNG directly in your browser."
-        :badges="['Format', 'Size', 'Compress', 'Prefix']"
+        description="Drop your images. Get smaller files. Done."
+        :badges="['Resize', 'Convert', 'Rename', 'EXIF']"
         to="/compress"
         :style="cardStyle(1)"
       />
       <UiCard
         :icon="MagnifyingGlassIcon"
-        title="Scan your website"
-        description="Full Lighthouse audit — performance, SEO, accessibility and core web vitals."
+        title="Audit your site"
+        description="Run the audit. See what's broken. Ship faster."
         :badges="['Performance', 'SEO', 'Accessibility']"
-        to="/scan"
+        to="/audit"
         :style="cardStyle(0)"
       />
       <UiCard
         :icon="GlobeAltIcon"
-        title="Check DNS propagation"
-        description="Inspect propagation of A, MX, TXT, CNAME and more in one shot."
-        :badges="['A', 'AAAA', 'CNAME', 'MX', 'TXT', 'NS']"
+        title="Check your DNS"
+        description="Enter a domain. See the records. No guessing."
+        :badges="['Lookup', 'Propagation', 'SPF', 'DKIM']"
         to="/dns"
         :style="cardStyle(2)"
       />
       <UiCard
         :icon="PlayIcon"
         title="Test any API"
-        description="Fetch any public endpoint and explore the JSON response in a collapsible tree view."
-        :badges="['GET', 'POST', 'PUT', 'DELETE', 'HEAD']"
+        description="Send a request. See the response. That's it."
+        :badges="['REST', 'JSON', 'Tree view', 'Proxy']"
         to="/api"
         :style="cardStyle(3)"
       />

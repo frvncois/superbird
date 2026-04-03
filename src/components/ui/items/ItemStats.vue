@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, watch, nextTick } from 'vue'
 import NumberFlow from '@number-flow/vue'
-import { scoreColor, scoreOffset } from '@/utils/scan.js'
+import { scoreColor, scoreOffset } from '@/utils/audit.js'
 
 const props = defineProps<{
   label: string

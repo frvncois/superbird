@@ -15,7 +15,7 @@ withDefaults(
 <template>
   <h3
     :class="[
-      'inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-[10px] font-mono uppercase',
+      'inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-[10px] font-mono uppercase tracking-wider',
       {
         'bg-green-bg text-green-fg':     color === 'green',
         'bg-blue-bg text-blue-fg':       color === 'blue',

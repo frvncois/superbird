@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { useScanStore } from '@/stores/useScanStore'
+import { useAuditStore } from '@/stores/useAuditStore'
 import ItemStats from './ui/items/ItemStats.vue'
 
-const { status, scores } = storeToRefs(useScanStore())
+const { status, scores } = storeToRefs(useAuditStore())
 </script>
 
 <template>

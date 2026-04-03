@@ -8,6 +8,7 @@
   --color-background: #ffffff;
   --color-foreground: #0a0a0a;
   --color-secondary: #a0a3a6;
+  --color-card: #f3f4f6;
   --color-border: #e5e7eb;
   --color-icon-bg: #000000;
   --color-icon-txt: #FAFAFA;
@@ -21,7 +22,7 @@
 
   /* Semantic color pairs — bg + fg */
   --color-green-bg:    #dcfce7;
-  --color-green-fg:    #15803d;
+  --color-green-fg:    #29c965;
 
   --color-blue-bg:     #dbeafe;
   --color-blue-fg:     #1d4ed8;
@@ -44,7 +45,7 @@
   --color-yellow-fg:   #a16207;
 
   --color-muted-bg:    #f3f4f6;
-  --color-muted-fg:    #9ca3af;
+  --color-muted-fg:    #8d939e;
 
   --color-success:     #22c55e;
 }

@@ -1,12 +1,16 @@
 import { ref, shallowRef, computed } from 'vue'
 import { defineStore } from 'pinia'
-import { runScan, stripMarkdownLinks } from '../utils/scan'
+import { runAudit, stripMarkdownLinks } from '../utils/audit'
+import { AUDIT_ACTIONS } from '../utils/auditActions'
+import { getAuditInsight } from '../utils/auditInsights'
+import { buildAuditSummary } from '../utils/auditSummary'
+import { detectStack } from '../utils/detectStack'
 import type { RequestStatus, LighthouseResult, LighthouseAudit } from '@/types'
 
 type VitalStatus = 'pass' | 'warn' | 'fail' | 'n/a'
 interface Formatted { value: string; unit: string }
 
-export const useScanStore = defineStore('scan', () => {
+export const useAuditStore = defineStore('audit', () => {
   const url = ref('https://')
   const strategy = ref('desktop')
   const status = ref<RequestStatus>('idle')
@@ -140,7 +144,104 @@ export const useScanStore = defineStore('scan', () => {
       .sort((a, b) => a.score - b.score)
   })
 
-  async function scan() {
+  const topIssuesWithActions = computed(() => {
+    if (!result.value) return []
+    const audits = result.value.lighthouseResult.audits
+
+    return opportunities.value
+      .map(opp => {
+        const raw = audits[opp.id]
+        const savingsMs    = opp.savingsMs
+        const savingsBytes = opp.savingsBytes
+        const numericValue = raw?.numericValue ?? 0
+
+        // Savings: prefer ms → bytes → numericValue
+        const effectiveSavings = savingsMs > 0 ? savingsMs
+          : savingsBytes > 0 ? savingsBytes / 200
+          : numericValue
+
+        // Priority: savings + score penalty + image boost
+        const action = AUDIT_ACTIONS[opp.id]
+        const isImageIssue = action?.category === 'images'
+        const normalizedSavings = Math.min(effectiveSavings, 5000) / 5000
+        const scorePenalty      = 1 - opp.score
+        const imageBoost        = isImageIssue && savingsBytes > 100_000 ? 0.15 : 0
+        const priority          = normalizedSavings * 0.6 + scorePenalty * 0.3 + imageBoost
+
+        // savingsLabel
+        let savingsLabel: string | null = null
+        if (savingsMs >= 100) {
+          savingsLabel = savingsMs >= 1000
+            ? `${(savingsMs / 1000).toFixed(1)} s`
+            : `${Math.round(savingsMs)} ms`
+        } else if (savingsBytes >= 1024) {
+          const kb = savingsBytes / 1024
+          savingsLabel = kb >= 1024
+            ? `${(kb / 1024).toFixed(1)} MB`
+            : `${Math.round(kb)} KiB`
+        }
+
+        // impact
+        const isHigh = savingsMs > 1000 || savingsBytes > 500_000 || opp.score < 0.3
+        const isMed  = savingsMs > 300  || savingsBytes > 100_000 || opp.score < 0.7
+        const impact: 'high' | 'medium' | 'low' = isHigh ? 'high' : isMed ? 'medium' : 'low'
+
+        // display fields — suppress fix text if it would repeat the title
+        const displayTitle = action?.label ?? opp.title
+        const fixText = action?.fix && action.fix !== displayTitle ? action.fix : null
+
+        const route    = action?.route ?? null
+        const ctaLabel = action?.cta ?? (route ? 'Fix with Superbird' : null)
+
+        return {
+          id: opp.id,
+          originalTitle: opp.title,
+          displayTitle,
+          savingsLabel,
+          score: opp.score,
+          action,
+          impact,
+          impactLabel: impact === 'high' ? 'High impact' : impact === 'medium' ? 'Medium impact' : 'Low impact',
+          fixText,
+          priority,
+          route,
+          ctaLabel,
+          explain: action?.explain ?? null,
+          prompt: action?.prompt ?? null,
+        }
+      })
+      .sort((a, b) => b.priority - a.priority)
+      .slice(0, 3)
+  })
+
+  const quickVerdict = computed((): { title: string; subtitle: string } | null => {
+    const perf = scores.value?.performance
+    if (perf == null) return null
+    const p = perf / 100
+
+    const highCount = topIssuesWithActions.value.filter(i => i.impact === 'high').length
+    const title = highCount >= 2
+      ? "Start here."
+      : highCount === 1
+        ? "A few things are holding this back."
+        : p >= 0.9
+          ? "Your site is in good shape."
+          : "Something's slowing your site down."
+
+    const tbt = result.value?.lighthouseResult.audits['total-blocking-time']?.numericValue ?? null
+    const lcp = result.value?.lighthouseResult.audits['largest-contentful-paint']?.numericValue ?? null
+
+    const subtitle = getAuditInsight({
+      performanceScore: p,
+      tbt,
+      lcp,
+      opportunities: opportunities.value,
+    }) ?? 'Start with the issues below.'
+
+    return { title, subtitle }
+  })
+
+  async function audit() {
     const v = url.value.trim()
     if (v && !v.startsWith('http://') && !v.startsWith('https://')) {
       url.value = 'https://' + v
@@ -159,7 +260,7 @@ export const useScanStore = defineStore('scan', () => {
     const t2 = setTimeout(() => { if (status.value === 'loading') loadingStep.value = 2 }, 1800)
 
     try {
-      const data = await runScan(url.value, strategy.value, abortController.signal)
+      const data = await runAudit(url.value, strategy.value, abortController.signal)
       loadingStep.value = 3
       result.value = data
       status.value = 'done'
@@ -211,20 +312,83 @@ export const useScanStore = defineStore('scan', () => {
     return lines.join('\n')
   }
 
-  function rescan() {
+  function reaudit() {
     result.value = null
     status.value = 'idle'
-    scan()
+    audit()
   }
+
+  const detectedStack = computed((): string[] => {
+    if (!result.value) return []
+
+    // Scrape HTML fragments + URLs from all audit item fields
+    const audits = result.value.lighthouseResult.audits
+    const fragments: string[] = [url.value]
+    for (const audit of Object.values(audits)) {
+      const items = audit.details?.items
+      if (!Array.isArray(items)) continue
+      for (const item of items) {
+        for (const val of Object.values(item)) {
+          if (typeof val === 'string') {
+            fragments.push(val)
+          } else if (val && typeof val === 'object' && !Array.isArray(val)) {
+            const obj = val as Record<string, unknown>
+            const snippet = obj['snippet']
+            const urlVal = obj['url']
+            if (typeof snippet === 'string') fragments.push(snippet)
+            if (typeof urlVal === 'string') fragments.push(urlVal)
+          }
+        }
+      }
+    }
+
+    const html = fragments.join(' ')
+    const signals = detectStack(html)
+
+    // Merge with stackPacks — Lighthouse's own framework fingerprinting
+    const packs = (result.value.lighthouseResult.stackPacks ?? []).map(s => s.title)
+    const merged = [...packs]
+    for (const sig of signals) {
+      if (!merged.includes(sig)) merged.push(sig)
+    }
+
+    // Nuxt/Next.js implies Vue/React — drop the base framework to avoid redundancy
+    if (merged.includes('Nuxt') || merged.includes('Next.js')) {
+      return merged.filter(s => s !== 'Vue' && s !== 'React')
+    }
+
+    return merged
+  })
+
+  const auditSummary = computed((): string | null => {
+    if (!scores.value || !topIssuesWithActions.value.length) return null
+    return buildAuditSummary({
+      performance: scores.value.performance,
+      issues: topIssuesWithActions.value,
+      stack: detectedStack.value,
+    })
+  })
+
+  const fixPlanPrompt = computed((): string | null => {
+    if (!scores.value || !topIssuesWithActions.value.length) return null
+    const issues = topIssuesWithActions.value
+      .map((issue, i) => {
+        const savings = issue.savingsLabel ? ` (${issue.savingsLabel})` : ''
+        return `${i + 1}. ${issue.displayTitle}${savings}`
+      })
+      .join('\n')
+    return `I ran a Lighthouse audit and got these issues:\n\n${issues}\n\nScores:\n- Performance: ${scores.value.performance}\n- SEO: ${scores.value.seo}\n- Accessibility: ${scores.value.accessibility}\n- Best Practices: ${scores.value.bestPractices}\n\nExplain:\n1. What is causing these issues\n2. Which ones I should fix first\n3. Step-by-step plan to fix them\n\nContext: modern web app. Keep it practical and concise.`
+  })
 
   function setStrategy(s: string) {
     strategy.value = s
-    if (status.value === 'done') rescan()
+    if (status.value === 'done') reaudit()
   }
 
   return {
     url, strategy, status, loadingStep, result, errorMessage,
     isValidUrl, scores, vitals, opportunities, diagnostics, passedAudits, seoAudits,
-    scan, rescan, setStrategy, generateAiPrompt,
+    topIssuesWithActions, quickVerdict, auditSummary, fixPlanPrompt,
+    audit, reaudit, setStrategy, generateAiPrompt,
   }
 })

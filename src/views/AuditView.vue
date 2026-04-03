@@ -2,26 +2,27 @@
 import { computed, ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { MagnifyingGlassIcon } from '@heroicons/vue/24/outline'
-import { useScanStore } from '@/stores/useScanStore'
+import { useAuditStore } from '@/stores/useAuditStore'
 import SharedIntro from '@/components/shared/SharedIntro.vue'
 import UiLookup from '@/components/ui/UiLookup.vue'
-import ScanStats from '@/components/ScanStats.vue'
-import ScanList from '@/components/ScanList.vue'
-import ScanSkeleton from '@/components/skeletons/ScanSkeleton.vue'
+import AuditStats from '@/components/AuditStats.vue'
+import AuditSummary from '@/components/AuditSummary.vue'
+import AuditList from '@/components/AuditList.vue'
+import AuditSkeleton from '@/components/skeletons/AuditSkeleton.vue'
 import { useRouteLeave } from '@/composables/useRouteLeave'
 
-const scanStore = useScanStore()
-const { url, status, errorMessage } = storeToRefs(scanStore)
-const { scan, rescan } = scanStore
+const auditStore = useAuditStore()
+const { url, status, errorMessage } = storeToRefs(auditStore)
+const { audit, reaudit } = auditStore
 
-const scannedUrl = ref('')
+const auditedUrl = ref('')
 watch(status, (val) => {
-  if (val === 'done') scannedUrl.value = url.value
+  if (val === 'done') auditedUrl.value = url.value
 })
 
-const isDone = computed(() => status.value === 'done' && url.value === scannedUrl.value)
-const buttonLabel = computed(() => isDone.value ? 'Rescan' : 'Scan')
-const action = computed(() => isDone.value ? rescan : scan)
+const isDone = computed(() => status.value === 'done' && url.value === auditedUrl.value)
+const buttonLabel = computed(() => isDone.value ? 'Re-audit' : 'Audit')
+const action = computed(() => isDone.value ? reaudit : audit)
 const showSkeleton = computed(() => status.value === 'idle' || status.value === 'loading')
 const leaving = useRouteLeave()
 </script>
@@ -36,12 +37,12 @@ const leaving = useRouteLeave()
     placeholder="Enter a URL..."
     :buttonIcon="MagnifyingGlassIcon"
     :buttonLabel="buttonLabel"
-    loadingLabel="Scanning…"
+    loadingLabel="Auditing…"
     :loading="status === 'loading'"
     :onAction="action"
   />
 
-  <div class="relative mt-2">
+  <div>
     <!-- Skeleton (idle + loading) -->
     <Transition
       leave-active-class="absolute inset-x-0 top-0 transition-opacity duration-500 pointer-events-none"
@@ -51,7 +52,7 @@ const leaving = useRouteLeave()
       enter-from-class="opacity-0"
       enter-to-class="opacity-100"
     >
-      <ScanSkeleton v-if="showSkeleton" :loading="status === 'loading'" />
+      <AuditSkeleton v-if="showSkeleton" :loading="status === 'loading'" />
     </Transition>
 
     <!-- Error -->
@@ -75,8 +76,9 @@ const leaving = useRouteLeave()
       enter-to-class="opacity-100"
     >
       <div v-if="status === 'done'" class="space-y-3" :style="leaving ? { animation: 'superbird-fade-out 0.25s ease both' } : {}"  >
-        <ScanStats />
-        <ScanList />
+        <AuditStats />
+        <AuditSummary />
+        <AuditList />
       </div>
     </Transition>
   </div>
